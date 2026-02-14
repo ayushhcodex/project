@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Singh | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: ['selector', '[data-theme="dark"]'],
+        }
+        // Check theme before render
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <nav class="border-b dark:border-slate-800 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="/" class="font-bold text-xl dark:text-white">AYUSH<span class="text-blue-600">.SINGH</span></a>
+            
+            <div class="flex items-center space-x-6">
+                <div class="hidden md:flex space-x-6 font-medium text-sm text-slate-600 dark:text-slate-400">
+                    <a href="/" class="hover:text-blue-600 transition">Home</a>
+                    <a href="/blog" class="hover:text-blue-600 transition">Blog</a>
+                    <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
+                </div>
+<button id="theme-toggle"
+        class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-transparent dark:border-slate-700 transition-all">
+    <span id="theme-icon" class="text-xl"></span>
+</button>
+
+                <a href="#contact" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-5xl mx-auto px-4 py-12 w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const iconSpan = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        function updateIcon(theme) {
+            iconSpan.innerText = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        updateIcon(htmlElement.getAttribute('data-theme'));
+
+        toggleBtn.addEventListener('click', () => {
+            const newTheme = htmlElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+@app.get("/blog/{slug}")
+async def blog_post(request: Request, slug: str):
+    # Builds the path to your specific .md file
+    path = os.path.join(BLOG_DIR, f"{slug}.md")
+    
+    # Error handling if the file is missing
+    if not os.path.exists(path):
+        raise HTTPException(status_code=404, detail="Post not found")
+    
+    # Use your md_parser to get metadata and HTML content
+    meta, content = parse_markdown_file(path)
+    
+    # Fetch the CSS for syntax highlighting (this prevents the error you saw)
+    pygments_css = get_pygments_css()
+    
+    return templates.TemplateResponse("blog_post.html", {
+        "request": request, 
+        "content": content, 
+        "meta": meta,
+        "pygments_css": pygments_css  # Passing this variable to the HTML
+    })

@@ -1,0 +1,33 @@
+# --- Python Environment ---
+# Prevents uploading the massive library folder from your Mac
+venv/
+.venv/
+env/
+bin/
+lib/
+include/
+
+# --- Python Cache ---
+# Generated files that don't belong in source control
+__pycache__/
+*.py[cod]
+*$py.class
+app/__pycache__/
+
+# --- macOS System Files ---
+# Hidden files created by the Mac finder
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# --- IDE Settings ---
+# VS Code specific configuration
+.vscode/
+
+# --- Environment Variables ---
+# For future private API keys or database credentials
+.env
