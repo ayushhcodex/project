@@ -24,7 +24,7 @@ app/__pycache__/
 ehthumbs.db
 Thumbs.db
 
-# --- IDE Settings ---
+# --- IDE Settings 
 # VS Code specific configuration
 .vscode/
 
